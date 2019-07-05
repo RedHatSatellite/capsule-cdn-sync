@@ -2,7 +2,7 @@
 
 This program is used to configure the capsule to sync the rpm directly from the Red Hat cdn server instead of satellite server. It also deploy the manifest certificates on the capsule server which are needed for capsule - CDN communication and authentication. 
 
-## Use case / Scenario where this can be used.
+## Use case / Scenario
 
 Suppose there is an on-premise deployed satellite server and capsule servers are deployed on the cloud-like AWS or Azure. In this case, syncing the capsule server through satellite will consume a lot of bandwidth and also sync will take time depending on the network latency. 
 Using capsule-cdn-sync tool capsule server can be configured to sync the content directly from the CDN server.
