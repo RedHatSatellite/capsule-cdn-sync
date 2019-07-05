@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
 require 'zip'
 require 'json'
-require 'pry'
 
 manifest = ARGV[0]
 FileUtils.mkdir_p '/tmp/manifest'

@@ -23,6 +23,7 @@ After this go inside the cloned repository and run the below command.
 ```bash
 # cd capsule-cdn-sync
 # chmod 777 capsule-cdn-sync
+# gem install zip
 # ./capsule-cdn-sync /path/to/the/manifest.zip
 ```
 capsule-cdn-sync leverages the Alternate Content Sources functionality of the pulp. It creates the /etc/pulp/content/sources/conf.d/cdn.conf file where the alternate source is definded(cdn urls). 
