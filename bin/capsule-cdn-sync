@@ -1,0 +1,38 @@
+#!/usr/bin/ruby
+require 'optparse'
+require '../lib/capsule-cdn-sync.rb'
+
+class Parser
+	def self.parse(args)
+		options = {}
+		opts = OptionParser.new do |opts|
+			opts.banner = "Usage: capsule-cdn-sync [options] /path/to/manifest.zip"
+			opts.on('-u', '--username USERNAME', 'Username of satellite user') do |username|
+				options[:username] = username
+			end
+			opts.on('-p', '--password PASSWORD', 'Password of satellite user') do |password|
+				options[:password] = password
+			end
+			opts.on("-h", "--help", "Prints help") do
+				puts opts
+				exit 
+			end
+		end
+
+		opts.parse!(args)
+		if ARGV.empty?
+			puts opts
+			exit(-1)
+		end
+		
+		options
+	end
+end
+
+options = Parser.parse(ARGV)
+manifest = ARGV[0]
+workingdir = "/tmp/manifest/" 
+entitlement_dir = '/etc/pki/capsule-cdn-sync/'
+CapsuleSync.new(manifest, workingdir, entitlement_dir)
+#CapsuleSync.new(manifest, workingdir, entitlement_dir, options[:username], options[:password])
+
