@@ -13,8 +13,7 @@ class CapsuleSync
 	
 	def initialize(manifest_location, working_location, entitlement_location, alternate_source_file, username, password)
 		
-		#puts Socket.gethostname
- 		capsule = "vm254-117.gsslab.pnq2.redhat.com"
+ 		capsule = Socket.gethostname
  		@satellite = Satellite.new(username,password,capsule)
  		@manifest = Manifest.new(manifest_location, working_location, entitlement_location, alternate_source_file)
 
