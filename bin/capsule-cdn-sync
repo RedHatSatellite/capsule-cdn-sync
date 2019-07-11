@@ -33,6 +33,6 @@ options = Parser.parse(ARGV)
 manifest = ARGV[0]
 workingdir = "/tmp/manifest/" 
 entitlement_dir = '/etc/pki/capsule-cdn-sync/'
-CapsuleSync.new(manifest, workingdir, entitlement_dir)
-#CapsuleSync.new(manifest, workingdir, entitlement_dir, options[:username], options[:password])
+alternate_source_file = '/etc/pulp/content/sources/conf.d/cdn.conf'
+CapsuleSync.new(manifest, workingdir, entitlement_dir, alternate_source_file, options[:username], options[:password])
 

@@ -1,4 +1,5 @@
 class Satellite 
+
 	def initialize(username,password,capsule_name)
 		@username = username
 		@password = password
@@ -21,13 +22,33 @@ class Satellite
 		return environments
 	end
 	def get_repository
-		#=======================================================================================================================
-		# Need to continue from here. Logic -  Get all organizations where capsule is in and then nested loop with env to get all the repository info.
-		#=======================================================================================================================
+		allrepositories = []
+		capsule_orgs = get_capsule_organization
+		environments = get_lifecycle_environments
+		capsule_orgs.each do |org_id|
+			environments.each do |env|
+				results = sendRequest("/katello/api/organizations/#{org_id}/environments/#{env}/repositories","GET",nil)
+				results = JSON.parse(results)
+				results["results"].each do |repo|
+					if allrepositories.none?{|hash| hash['base_url'] == repo['url']}
+						singlerepo =  {'reponame' => repo['name'],'base_url' => repo['url'],'label' => repo['label'], 'product_id' => repo['product']['cp_id']}
+						allrepositories << singlerepo
+					end
+				end
+			end
+		end
+		return allrepositories
+	end
 
-		
-		# environments = get_lifecycle_environments
-		# result = sendRequest("/katello/api/organizations/1/environments/2/repositories")
+	def get_capsule_organization
+		capsule_id = getcapsuleId
+		result = sendRequest("/katello/api/capsules/#{capsule_id}","GET",nil)
+		organizations = []
+		JSON.parse(result)['organizations'].each do |org|
+			organizations << org["id"]
+		end
+		return organizations
+
 	end
 
 	def sendRequest(api, req_method, params)
