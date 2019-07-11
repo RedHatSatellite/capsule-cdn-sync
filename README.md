@@ -11,7 +11,7 @@ Using capsule-cdn-sync tool capsule server can be configured to sync the content
 
 On preinstalled satellite capsule server clone this project. 
 ```bash
-# git clone https://github.com/patilsuraj767/capsule-cdn-sync.git
+# git clone https://github.com/RedHatSatellite/capsule-cdn-sync.git
 # cd capsule-cdn-sync
 # bundle install
 ```
