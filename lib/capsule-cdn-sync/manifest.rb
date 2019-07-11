@@ -47,7 +47,7 @@ class Manifest
 				end
 				
 				allrepositories.each do |repo|
-					if products.any?(repo["product_id"]) #repo["product_id"] == product['productId']
+					if products.include?(repo["product_id"]) 
 						repo["ssl_key"] = @entitlement_dir+File.basename(file, ".*")+'.key'
 						repo["ssl_cert"] = @entitlement_dir+File.basename(file, ".*")+'.cert'
 						final_repositories << repo
